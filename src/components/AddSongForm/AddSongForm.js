@@ -17,11 +17,26 @@ const addSongForm = props => {
     return (
         <Fragment>
             <h2>Voeg een song toe</h2>
-            <form onSubmit={props.submitted} style={styleForm}>
+            <form onSubmit={props.submitted} style={styleForm} autoComplete="off">
                 <input style={styleInput} type="Text" name="title" placeholder="Song" />
                 <input style={styleInput} type="Text" name="artist" placeholder="Artist" />
-                <input style={styleInput} type="Text" name="genre" placeholder="Genre" />
-                <input style={styleInput} type="Text" name="rating" placeholder="Rating" />
+                <select style={styleInput} name="genre">
+                    <option value="" disabled selected>Genre</option>
+                    <option value="Dance">Dance</option>
+                    <option value="House">House</option>
+                    <option value="Nederlands">Nederlands</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Anders">Anders</option>
+                </select>
+                <select style={styleInput} name="rating">
+                    <option value="" disabled selected>Cijfer</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
                 <input style={styleInput} type="Submit" />
             </form>
         </Fragment>
