@@ -6,6 +6,7 @@ const navigation = () => {
         listStyleType: 'none',
         display: 'flex',
         justifyContent: 'center',
+        marginBottom: '20px'
     };
 
     const styleLi = {
@@ -26,10 +27,13 @@ const navigation = () => {
         <nav>
             <ul style={styleUl}>
                 <li style={styleLi}>
-                    <NavLink to="/about">Over ons</NavLink>
+                    <NavLink to="/" exact>Home</NavLink>
+                </li>
+                <li style={styleLi}>
+                    <NavLink to="/about" exact>Over ons</NavLink>
                 </li>
                 <li style={styleLiLast}>
-                    <NavLink to="/add">Song toevoegen</NavLink>
+                    <NavLink to="/add" exact>Song toevoegen</NavLink>
                 </li>
             </ul>
         </nav>
