@@ -13,7 +13,7 @@ class App extends Component {
     sortASC: true
   }
 
-  fetchSongs = () => this.state.songs ? [...this.state.songs] : [];
+  fetchSongs = () => localStorage.getItem('songs') ? JSON.parse(localStorage.getItem('songs')) : [];
 
   addSongFormHandler = event => {
     event.preventDefault();
@@ -70,6 +70,26 @@ class App extends Component {
     });
   }
 
+  genreFilterHandler = event => {
+    const songs = this.fetchSongs();
+    if (event.target.value === 'Alles') {
+      this.setState({songs: JSON.parse(localStorage.getItem('songs'))})
+    } else {
+      const filteredSongs = songs.filter(song => song.genre === event.target.value);
+      this.setState({songs: filteredSongs});
+    }
+  }
+
+  ratingFilterHandler = event => {
+    const songs = this.fetchSongs();
+    if (event.target.value === 'Alles') {
+      this.setState({songs: JSON.parse(localStorage.getItem('songs'))})
+    } else {
+      const filteredSongs = songs.filter(song => song.rating === parseInt(event.target.value));
+      this.setState({songs: filteredSongs});
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -80,7 +100,14 @@ class App extends Component {
             <Route 
               path="/" 
               exact 
-              render={props => <PlayList {...props} songs={this.state.songs} deleteClicked={this.deleteSongButtonHandler} clickedSort={this.sortHandler} />} />
+              render={props => <PlayList 
+                {...props} 
+                songs={this.state.songs} 
+                genreFilterHandler={this.genreFilterHandler}
+                ratingFilterHandler={this.ratingFilterHandler}
+                deleteClicked={this.deleteSongButtonHandler} 
+                clickedSort={this.sortHandler} />} 
+              />
             <Route
               path="/about" 
               exact 
