@@ -9,7 +9,8 @@ import AddSongForm from './components/AddSongForm/AddSongForm';
 
 class App extends Component {
   state = {
-    songs: JSON.parse(localStorage.getItem('songs'))
+    songs: JSON.parse(localStorage.getItem('songs')),
+    sortASC: true
   }
 
   fetchSongs = () => this.state.songs ? [...this.state.songs] : [];
@@ -23,7 +24,7 @@ class App extends Component {
         title: event.target.title.value,
         artist: event.target.artist.value,
         genre: event.target.genre.value,
-        rating: event.target.rating.value
+        rating: parseInt(event.target.rating.value)
       };
 
       const songs = this.fetchSongs();
@@ -45,6 +46,30 @@ class App extends Component {
     this.setState({songs: JSON.parse(localStorage.getItem('songs'))});
   };
 
+  sortHandler = sortBy => {
+    const songs = this.fetchSongs();
+
+    if (this.state.sortASC) {
+      songs.sort((song1, song2) => {
+        if (song1[sortBy] < song2[sortBy]) return -1;
+        else if (song1[sortBy] > song2[sortBy]) return 1;
+        else return 0;
+      })
+    } else {
+      songs.sort((song1, song2) => {
+        if (song1[sortBy] > song2[sortBy]) return -1;
+        else if (song1[sortBy] < song2[sortBy]) return 1;
+        else return 0;
+      })
+    }
+
+    localStorage.setItem('songs', JSON.stringify(songs));
+    this.setState({
+      songs: JSON.parse(localStorage.getItem('songs')),
+      sortASC: !this.state.sortASC
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -55,7 +80,7 @@ class App extends Component {
             <Route 
               path="/" 
               exact 
-              render={props => <PlayList {...props} songs={this.state.songs} deleteClicked={this.deleteSongButtonHandler} />} />
+              render={props => <PlayList {...props} songs={this.state.songs} deleteClicked={this.deleteSongButtonHandler} clickedSort={this.sortHandler} />} />
             <Route
               path="/about" 
               exact 
