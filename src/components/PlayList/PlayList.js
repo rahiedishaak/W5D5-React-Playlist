@@ -2,14 +2,14 @@ import React from 'react';
 
 const playList = props => {
     const styleTable = {
-        margin: '20px auto 0',
         textAlign: 'left',
-        width: '800px',
+        marginLeft: '20px',
+        width: '90%'
     };
 
     const styleTD = {
         padding: '3px'
-    }
+    };
 
     const styleBtn = {
         backgroundColor: 'red',
@@ -18,7 +18,7 @@ const playList = props => {
         border: 'none',
         outline: 'none',
         cursor: 'pointer'
-    }
+    };
 
     const songs = props.songs.map(song => (
         <tr key={song.id}>

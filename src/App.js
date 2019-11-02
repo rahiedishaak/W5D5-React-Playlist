@@ -31,10 +31,9 @@ class App extends Component {
       localStorage.setItem('songs', JSON.stringify(songs));
       this.setState({songs: JSON.parse(localStorage.getItem('songs'))});
 
-      event.target.title.value = '';
-      event.target.artist.value = '';
-      event.target.genre.value = '';
-      event.target.rating.value = '';
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 500);
     }
   };
 
