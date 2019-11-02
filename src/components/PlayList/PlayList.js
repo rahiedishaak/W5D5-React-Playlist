@@ -20,12 +20,23 @@ const playList = props => {
         cursor: 'pointer'
     };
 
+    const styleSpan = {
+        marginLeft: '4px',
+        fontSize: '12px',
+        fontWeight: 'normal',
+        letterSpacing: '1.2px',
+        color: '#666',
+        cursor: 'pointer'
+    };
+
     const songs = props.songs.map(song => (
         <tr key={song.id}>
             <td style={styleTD}>{song.title}</td>
             <td style={styleTD}>{song.artist}</td>
             <td style={styleTD}>{song.genre}</td>
-            <td style={styleTD}>{song.rating}</td>
+            <td style={styleTD}>
+                {[...new Array(song.rating)].map(_ => _ = '*')}                
+            </td>
             <td><button style={styleBtn} onClick={() => props.deleteClicked(song.id)}>verwijder</button></td>
         </tr>
     ));
@@ -34,10 +45,22 @@ const playList = props => {
         <table style={styleTable}>
             <thead>
                 <tr>
-                    <th style={styleTD}>Nummer</th>
-                    <th style={styleTD}>Artiest</th>
-                    <th style={styleTD}>Genre</th>
-                    <th style={styleTD}>Beoordeling</th>
+                    <th style={styleTD}>
+                        Nummer
+                        <span style={styleSpan} onClick={() => props.clickedSort('title')}>(sorteer)</span>
+                    </th>
+                    <th style={styleTD}>
+                        Artiest
+                        <span style={styleSpan} onClick={() => props.clickedSort('artist')}>(sorteer)</span>
+                    </th>
+                    <th style={styleTD}>
+                        Genre
+                        <span style={styleSpan} onClick={() => props.clickedSort('genre')}>(sorteer)</span>
+                    </th>
+                    <th style={styleTD}>
+                        Beoordeling
+                        <span style={styleSpan} onClick={() => props.clickedSort('rating')}>(sorteer)</span>
+                    </th>
                 </tr>
             </thead>
             <tbody>
