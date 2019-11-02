@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import FilterSongs from '../FilterSongs/FilterSongs';
 
 const playList = props => {
     const styleTable = {
@@ -42,31 +43,36 @@ const playList = props => {
     ));
     
     return (
-        <table style={styleTable}>
-            <thead>
-                <tr>
-                    <th style={styleTD}>
-                        Nummer
-                        <span style={styleSpan} onClick={() => props.clickedSort('title')}>(sorteer)</span>
-                    </th>
-                    <th style={styleTD}>
-                        Artiest
-                        <span style={styleSpan} onClick={() => props.clickedSort('artist')}>(sorteer)</span>
-                    </th>
-                    <th style={styleTD}>
-                        Genre
-                        <span style={styleSpan} onClick={() => props.clickedSort('genre')}>(sorteer)</span>
-                    </th>
-                    <th style={styleTD}>
-                        Beoordeling
-                        <span style={styleSpan} onClick={() => props.clickedSort('rating')}>(sorteer)</span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {songs}
-            </tbody>
-        </table>
+        <Fragment>
+            <FilterSongs 
+                genreFilterHandler={props.genreFilterHandler} 
+                ratingFilterHandler={props.ratingFilterHandler} />
+            <table style={styleTable}>
+                <thead>
+                    <tr>
+                        <th style={styleTD}>
+                            Nummer
+                            <span style={styleSpan} onClick={() => props.clickedSort('title')}>(sorteer)</span>
+                        </th>
+                        <th style={styleTD}>
+                            Artiest
+                            <span style={styleSpan} onClick={() => props.clickedSort('artist')}>(sorteer)</span>
+                        </th>
+                        <th style={styleTD}>
+                            Genre
+                            <span style={styleSpan} onClick={() => props.clickedSort('genre')}>(sorteer)</span>
+                        </th>
+                        <th style={styleTD}>
+                            Beoordeling
+                            <span style={styleSpan} onClick={() => props.clickedSort('rating')}>(sorteer)</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {songs}
+                </tbody>
+            </table>
+        </Fragment>
     );
 };
 
