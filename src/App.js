@@ -6,6 +6,7 @@ import Navigation from './components/Navigation/Navigation';
 import PlayList from './components/PlayList/PlayList';
 import About from './components/About/About';
 import AddSongForm from './components/AddSongForm/AddSongForm';
+import EditSongForm from './components/EditSongForm/EditSongForm';
 
 class App extends Component {
   state = {
@@ -24,6 +25,7 @@ class App extends Component {
         title: event.target.title.value,
         artist: event.target.artist.value,
         genre: event.target.genre.value,
+        // eslint-disable-next-line
         rating: parseInt(event.target.rating.value)
       };
 
@@ -34,7 +36,32 @@ class App extends Component {
 
       setTimeout(() => {
         window.location.href = '/';
-      }, 500);
+      }, 400);
+    }
+  };
+
+  editSongFormHandler = (event, songID) => {
+    event.preventDefault();
+
+    if (event.target.title.value && event.target.artist.value && event.target.genre.value && event.target.rating.value) {
+
+      const songs = this.fetchSongs();
+      const index = songs.findIndex(song => song.id === songID);
+      songs[index] = {
+        id: songID,
+        title: event.target.title.value,
+        artist: event.target.artist.value,
+        genre: event.target.genre.value,
+        // eslint-disable-next-line
+        rating: parseInt(event.target.rating.value)
+      };
+
+      localStorage.setItem('songs', JSON.stringify(songs));
+      this.setState({songs: JSON.parse(localStorage.getItem('songs'))});
+
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 400);
     }
   };
 
@@ -85,6 +112,7 @@ class App extends Component {
     if (event.target.value === 'Alles') {
       this.setState({songs: JSON.parse(localStorage.getItem('songs'))})
     } else {
+      // eslint-disable-next-line
       const filteredSongs = songs.filter(song => song.rating === parseInt(event.target.value));
       this.setState({songs: filteredSongs});
     }
@@ -106,7 +134,8 @@ class App extends Component {
                 genreFilterHandler={this.genreFilterHandler}
                 ratingFilterHandler={this.ratingFilterHandler}
                 deleteClicked={this.deleteSongButtonHandler} 
-                clickedSort={this.sortHandler} />} 
+                clickedSort={this.sortHandler}
+                edited={this.editSongFormHandler} />} 
               />
             <Route
               path="/about" 
@@ -117,6 +146,11 @@ class App extends Component {
               path="/add"
               exact 
               render={props => <AddSongForm {...props} submitted={this.addSongFormHandler} />} 
+            />
+            <Route
+              path="/edit/:id"
+              exact
+              render={props => <EditSongForm {...props} edited={this.editSongFormHandler} />}
             />
           </Switch>
         </BrowserRouter>
