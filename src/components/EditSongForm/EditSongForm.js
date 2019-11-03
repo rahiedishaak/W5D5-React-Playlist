@@ -24,7 +24,7 @@ const editSongForm = props => {
 
     return (
         <Fragment>
-            <h2>Bewerk nummer: {props.location.state.song.title}</h2>
+            <h2>Nummer bewerken: {props.location.state.song.title}</h2>
             <form 
                 onSubmit={event => props.edited(event, props.location.state.song.id)} 
                 style={styleForm} 

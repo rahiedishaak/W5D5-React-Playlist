@@ -33,7 +33,7 @@ const navigation = () => {
                     <NavLink to="/about" exact>Over ons</NavLink>
                 </li>
                 <li style={styleLiLast}>
-                    <NavLink to="/add" exact>Song toevoegen</NavLink>
+                    <NavLink to="/add" exact>Nummer toevoegen</NavLink>
                 </li>
             </ul>
         </nav>

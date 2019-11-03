@@ -24,10 +24,10 @@ const addSongForm = props => {
 
     return (
         <Fragment>
-            <h2>Voeg een song toe</h2>
+            <h2>Nummer toevoegen</h2>
             <form onSubmit={props.submitted} style={styleForm} autoComplete="off">
-                <input style={styleInput} type="Text" name="title" placeholder="Song" />
-                <input style={styleInput} type="Text" name="artist" placeholder="Artist" />
+                <input style={styleInput} type="Text" name="title" placeholder="Nummer" />
+                <input style={styleInput} type="Text" name="artist" placeholder="Artiest" />
                 
                 <label style={styleLabel} htmlFor="genre">Genre:</label>
                 <select style={styleInput} name="genre" id="genre">
