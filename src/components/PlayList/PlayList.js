@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import FilterSongs from '../FilterSongs/FilterSongs';
+import { Link } from 'react-router-dom';
 
 const playList = props => {
     const styleTable = {
@@ -12,13 +13,23 @@ const playList = props => {
         padding: '3px'
     };
 
-    const styleBtn = {
+    const styleBtnDelete = {
         backgroundColor: 'red',
         padding: '5px',
         color: 'white',
         border: 'none',
         outline: 'none',
         cursor: 'pointer'
+    };
+
+    const styleBtnEdit = {
+        backgroundColor: 'green',
+        padding: '5px',
+        color: 'white',
+        fontWeight: '400',
+        fontSize: '13.3333px',
+        fontFamily: 'Arial',
+        marginRight: '2px'
     };
 
     const styleSpan = {
@@ -38,7 +49,13 @@ const playList = props => {
             <td style={styleTD}>
                 {[...new Array(song.rating)].map(_ => _ = '*')}                
             </td>
-            <td><button style={styleBtn} onClick={() => props.deleteClicked(song.id)}>verwijder</button></td>
+            <td>
+                <Link to={{
+                    pathname: `/edit/${song.id}`, 
+                    state: { song: song }
+                }} style={styleBtnEdit}>bewerk</Link>
+                <button style={styleBtnDelete} onClick={() => props.deleteClicked(song.id)}>verwijder</button>
+            </td>
         </tr>
     ));
     
