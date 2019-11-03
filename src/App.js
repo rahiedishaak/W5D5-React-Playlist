@@ -10,7 +10,7 @@ import EditSongForm from './components/EditSongForm/EditSongForm';
 
 class App extends Component {
   state = {
-    songs: JSON.parse(localStorage.getItem('songs')),
+    songs: localStorage.getItem('songs') ? JSON.parse(localStorage.getItem('songs')) : [],
     sortASC: true
   }
 
@@ -90,9 +90,8 @@ class App extends Component {
       })
     }
 
-    localStorage.setItem('songs', JSON.stringify(songs));
     this.setState({
-      songs: JSON.parse(localStorage.getItem('songs')),
+      songs: songs,
       sortASC: !this.state.sortASC
     });
   }
